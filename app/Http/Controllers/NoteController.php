@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
-    public function index (Request $request) {
+    public function index (Request $request, Note $note) {
         if (isset($request['search'])) {
             return view('notes', ['notes' => 
                 Note::where('title', 'like', "%{$request['search']}%")
@@ -16,10 +16,6 @@ class NoteController extends Controller
             ]);
         } 
 
-        return view('notes', ['notes' => Note::all()]);
-    }
-
-    public function show (Note $note) {
-        return view ('note', $note);
+        return view('notes', ['notes' => Note::all(), 'selectedNote' => $note]);
     }
 }
