@@ -18,4 +18,8 @@ class NoteController extends Controller
 
         return view('notes', ['notes' => Note::all()]);
     }
+
+    public function show (Note $note) {
+        return view ('note', $note);
+    }
 }
