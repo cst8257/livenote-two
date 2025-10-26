@@ -3,13 +3,22 @@
 namespace App\Livewire;
 
 use App\Models\Note;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Reactive;
 use Livewire\Component;
 
 class NoteViewer extends Component
 {
-    #[Reactive]
     public $selectedNote = [];
+    public $title = '';
+    public $content = '';
+
+    #[On('noteSelected')]
+    public function selectNote ($note) {
+        $this->selectedNote = $note;
+        $this->title = $note['title'];
+        $this->content = $note['content'];
+    }
 
     public function save () 
     {
@@ -17,6 +26,8 @@ class NoteViewer extends Component
         $note->title = $this->title;
         $note->content = $this->content;
         $note->save();
+
+        $this->dispatch('notesUpdated');
     }
 
     public function render()
