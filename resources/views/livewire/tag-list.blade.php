@@ -4,6 +4,8 @@
             All Notes
         </a>
         <h2 class="text-muted fs-6 mb-2">TAGS</h2>
-        <a class="text-muted py-2 ms-2 pointer text-decoration-none">Tag name</a>
+        @foreach ($tags as $tag)
+        <a class="text-muted py-2 ms-2 pointer text-decoration-none">{{ $tag['name'] }}</a>
+        @endforeach
     </div>
 </div>

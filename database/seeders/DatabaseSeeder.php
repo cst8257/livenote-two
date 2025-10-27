@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Note;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -22,5 +23,7 @@ class DatabaseSeeder extends Seeder
         Note::create(['title' => 'Recipe Ideas', 'content' => 'Try making lasagna and chocolate cake.']);
         Note::create(['title' => 'Travel Itinerary', 'content' => 'Visit Paris, Rome, and Barcelona.']);
         Note::create(['title' => 'Book Recommendations', 'content' => 'Read "1984" by George Orwell and "Dune" by Frank Herbert.']);
+
+        Tag::factory(5)->create();
     }
 }
