@@ -17,6 +17,18 @@
                 <textarea rows="10" class="form-control" placeholder="Write your note..."
                     wire:model="content"></textarea>
             </div>
+
+            <div class="mb-2">
+                <label class="form-label">Tags</label>
+                <div class="d-flex flex-wrap gap-3">
+                    @foreach($availableTags as $tag)
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{ $tag['id'] }}" id="tag-{{ $tag['id'] }}">
+                            <label class="form-check-label" for="tag-{{ $tag['id'] }}">{{ $tag['name'] }}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </section>
     @else
@@ -25,4 +37,6 @@
         <button class="btn btn-primary">Create New Note</button>
     </div>
     @endif
+
+    <button class="btn btn-primary btn-lg rounded-circle position-fixed bottom-0 end-0 mb-3 me-3">&plus;</button>
 </div>

@@ -12,7 +12,7 @@ class TagList extends Component
 
     public function mount () 
     {
-        $this->tags = Tag::all();
+        $this->tags = Tag::orderBy('name')->get();
     }
 
     public function render()

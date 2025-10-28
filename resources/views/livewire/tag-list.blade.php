@@ -5,7 +5,7 @@
         </a>
         <h2 class="text-muted fs-6 mb-2">TAGS</h2>
         @foreach ($tags as $tag)
-        <a class="text-muted py-2 ms-2 pointer text-decoration-none">{{ $tag['name'] }}</a>
+        <a class="{{ $selectedTag === $tag['id'] ? 'text-body fw-bold' : 'text-muted' }} text-muted py-2 ms-2 pointer text-decoration-none">{{ $tag['name'] }}</a>
         @endforeach
     </div>
 </div>

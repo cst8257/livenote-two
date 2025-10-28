@@ -18,8 +18,8 @@ class NoteList extends Component
     }
 
     public function selectNote ($id) {
-        $this->selectedNote = Note::find($id);
-        $this->dispatch('noteSelected', $this->selectedNote);
+        $this->selectedNote = $id;
+        $this->dispatch('noteSelected', $id);
     }
 
     #[On('notesSearched')]
@@ -32,9 +32,10 @@ class NoteList extends Component
         if ($this->search) {
             $this->notes = Note::where('title', 'like', "%{$this->search}%")
                 ->orWhere('content', 'like', "%{$this->search}%")
+                ->orderBy('updated_at', 'desc')
                 ->get();
         } else {
-            $this->notes = Note::all();
+            $this->notes = Note::orderBy('updated_at', 'desc')->get();
         }
         
     }

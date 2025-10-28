@@ -24,6 +24,9 @@ class DatabaseSeeder extends Seeder
         Note::create(['title' => 'Travel Itinerary', 'content' => 'Visit Paris, Rome, and Barcelona.']);
         Note::create(['title' => 'Book Recommendations', 'content' => 'Read "1984" by George Orwell and "Dune" by Frank Herbert.']);
 
-        Tag::factory(5)->create();
+        Tag::create(['name' => 'Personal']);
+        Tag::create(['name' => 'Work']);
+        Tag::create(['name' => 'Shopping']);
+        Tag::create(['name' => 'Fitness']);
     }
 }
