@@ -7,6 +7,7 @@ use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,5 +29,13 @@ class DatabaseSeeder extends Seeder
         Tag::create(['name' => 'Work']);
         Tag::create(['name' => 'Shopping']);
         Tag::create(['name' => 'Fitness']);
+
+        DB::table('note_tag')->insert([
+            ['note_id' => 1, 'tag_id' => 2],
+            ['note_id' => 2, 'tag_id' => 1],
+            ['note_id' => 2, 'tag_id' => 3],
+            ['note_id' => 3, 'tag_id' => 1],
+            ['note_id' => 3, 'tag_id' => 4]
+        ]);
     }
 }

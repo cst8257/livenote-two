@@ -12,14 +12,28 @@ class NoteList extends Component
     public $notes = [];
     public $selectedNote = [];
     public $search = '';
+    public $tagId = null;
 
     public function mount () {
+        $this->getNotes();
+    }
+
+    #[On('tagChanged')]
+    public function setTag($tagId)
+    {
+        $this->tagId = $tagId;
         $this->getNotes();
     }
 
     public function selectNote ($id) {
         $this->selectedNote = $id;
         $this->dispatch('noteSelected', $id);
+    }
+
+    #[On('noteCreated')]
+    public function createNote ($id) {
+        $this->getNotes();
+        $this->selectNote($id);
     }
 
     #[On('notesSearched')]
@@ -29,15 +43,22 @@ class NoteList extends Component
     }
 
     public function getNotes () {
-        if ($this->search) {
-            $this->notes = Note::where('title', 'like', "%{$this->search}%")
-                ->orWhere('content', 'like', "%{$this->search}%")
-                ->orderBy('updated_at', 'desc')
-                ->get();
-        } else {
-            $this->notes = Note::orderBy('updated_at', 'desc')->get();
+        $query = Note::query();
+
+        if ($this->tagId) {
+            $query->whereHas('tags', function ($query) {
+                $query->where('tag_id', $this->tagId);
+            });
         }
-        
+
+        if ($this->search) {
+            $query->whereAny([
+                    'title',
+                    'content'
+                ], 'like', "%{$this->search}%");   
+        } 
+
+        $this->notes = $query->orderBy('updated_at', 'desc')->get();
     }
     
     public function render()

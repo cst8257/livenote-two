@@ -15,6 +15,12 @@ class TagList extends Component
         $this->tags = Tag::orderBy('name')->get();
     }
 
+    public function selectTag($tagId)
+    {
+        $this->selectedTag = $tagId;
+        $this->dispatch('tagChanged', $tagId);
+    }
+
     public function render()
     {
         return view('livewire.tag-list');
