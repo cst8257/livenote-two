@@ -10,17 +10,9 @@
         .pointer { cursor: pointer; }
     </style>
 </head>
-<body class="overflow-hidden h-100">
+<body>
     <main class="container-fluid">
-        {{ $nav }}
-        <div class="row vh-100 py-3">
-            <div class="col-12 col-md-5 col-lg-4 d-flex flex-column">
-                {{ $notes }}
-            </div>
-            <div class="col-12 col-md-7 col-lg-8 pt-5">
-                {{ $note }}
-            </div>
-        </div>
+        {{ $slot }}
     </main>
 </body>
 </html>
