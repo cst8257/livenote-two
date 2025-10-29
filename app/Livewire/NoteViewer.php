@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Note;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Reactive;
 use Livewire\Component;
@@ -23,7 +24,7 @@ class NoteViewer extends Component
 
     #[On('noteSelected')]
     public function selectNote ($id) {
-        $note = Note::find($id);
+        $note = Auth::user()->notes->find($id);
         $this->selectedNote = $note;
         $this->title = $note['title'];
         $this->content = $note['content'];
@@ -34,6 +35,7 @@ class NoteViewer extends Component
         $note = new Note();
         $note->title = 'Untitled';
         $note->content = '';
+        $note->user_id = Auth::id();
         $note->save();
         $this->dispatch('noteCreated', $note->id);
     }

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Note;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -43,7 +44,7 @@ class NoteList extends Component
     }
 
     public function getNotes () {
-        $query = Note::query();
+        $query = Note::query()->where('user_id', Auth::id());
 
         if ($this->tagId) {
             $query->whereHas('tags', function ($query) {

@@ -4,21 +4,7 @@
     </header>
     <div class="row">
         <div class="col col-md-6 offset-md-3 col-xl-4 offset-xl-4">
-            <form class="bg-light p-5 border border-1 mb-3" novalidate>
-                <div class="form-group mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control">
-                </div>
-                <div class="form-group mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control">
-                </div>
-                <button class="btn btn-primary">Login</button>
-
-                @if (isset($loginMessage))
-                <div class="alert alert-danger mt-3">{{ $loginMessage }}</div>
-                @endif
-            </form>
+            <livewire:login-form />
         </div>
     </div>
 </x-layout>
